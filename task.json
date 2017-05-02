@@ -1,0 +1,45 @@
+{
+  "id": "87cf0f14-2037-4763-ae39-fb2153ee7403",
+  "name": "MobileCenterBuild",
+  "friendlyName": "Mobile Center Build",
+  "description": "Build mobile app packages with Visual Studio Mobile Center.",
+  "author": "Simon Lamb",
+  "helpMarkDown": "Build mobile app packages with Visual Studio Mobile Center.",
+  "visibility": [
+    "Build",
+    "Release"
+  ],
+  "category": "Build",
+  "demands": [],
+  "version": {
+    "Major": "1",
+    "Minor": "0",
+    "Patch": "33"
+  },
+  "minimumAgentVersion": "1.83.0",
+  "instanceNameFormat": "MobileCenterBuild $(message)",
+  "inputs": [
+    {
+        "name": "serverEndpoint",
+        "type": "connectedService:vsmobilecenter",
+        "label": "Mobile Center Connection",
+        "defaultValue": "",
+        "required": true,
+        "helpMarkDown": "Select the service endpoint for your Visual Studio Mobile Center connection. To create one, click the Manage link and create a new service endpoint."
+    },
+    {
+    "name": "appSlug",
+    "type": "string",
+    "label": "App Slug",
+    "defaultValue": "",
+    "required": true,
+    "helpMarkDown": "The app slug is in the format of **{username}/{app_identifier}**.  To locate **{username}** and **{app_identifier}** for an app, click on its name from https://mobile.azure.com/apps, and the resulting URL is in the format of [https://mobile.azure.com/users/<b>{username}</b>/apps/<b>{app_identifier}</b>](https://mobile.azure.com/users/{username}/apps/{app_identifier})"
+    }
+  ],
+  "execution": {
+    "Node": {
+      "target": "src/app.js",
+      "argumentFormat": ""
+    }
+  }
+}
