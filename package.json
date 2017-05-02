@@ -7,13 +7,16 @@
     "src": "src"
   },
   "scripts": {
-    "test": "istanbul cover --report cobertura node_modules/mocha/bin/_mocha -- -R list"
+    "test": "concurrently \"npm run cobertura\" \"npm run html\"",
+    "cobertura": "istanbul cover --report cobertura node_modules/mocha/bin/_mocha -- -R list",
+    "html": "istanbul cover node_modules/mocha/bin/_mocha -- -R list"
   },
   "repository": {},
   "keywords": [],
   "author": "Simon Lamb",
   "license": "MIT",
   "devDependencies": {
+    "concurrently": "^3.4.0",
     "mocha": "^2.4.5",
     "sinon": "^1.17.3"
   },
