@@ -13,12 +13,12 @@ describe('app', function () {
    it('should run the task', function () {
       /* Arrange */
       var taskStub = sinon.stub(task, 'run');
-      taskStub.withArgs('https://api.mobile.azure.com', "someuser/someapp", 'fe6268eb90874bb1d96a800480eb0b9a', 'VSTS (Task:VSMobileCenterBuild)', 'v1.0');
+      taskStub.withArgs('https://api.mobile.azure.com', "someuser/someapp", 'apikey', 'VSTS (Task:VSMobileCenterBuild)', 'v1.0');
 
       sinon.stub(tl, 'debug');
 
       var utilStub = sinon.stub(util, 'getMobileCenterEndpointDetails');
-      utilStub.withArgs('serverEndpoint').returns({ apiServer: 'https://api.mobile.azure.com', apiVersion: 'v1.0', authToken: 'fe6268eb90874bb1d96a800480eb0b9a' });
+      utilStub.withArgs('serverEndpoint').returns({ apiServer: 'https://api.mobile.azure.com', apiVersion: 'v1.0', authToken: 'apikey' });
 
       var input = sinon.stub(tl, 'getInput');
       input.withArgs('appSlug').returns('someuser/someapp');
@@ -38,7 +38,7 @@ describe('app', function () {
          // Test that is was called with the correct values
          assert.equal(taskStub.getCall(0).args[0], 'https://api.mobile.azure.com', 'apiServer arg is not correct. ' + taskStub.getCall(0).args[0]);
          assert.equal(taskStub.getCall(0).args[1], 'someuser/someapp', 'appSlug arg is not correct. ' + taskStub.getCall(0).args[1]);
-         assert.equal(taskStub.getCall(0).args[2], 'fe6268eb90874bb1d96a800480eb0b9a', 'apiToken arg is not correct. ' + taskStub.getCall(0).args[2]);
+         assert.equal(taskStub.getCall(0).args[2], 'apikey', 'apiToken arg is not correct. ' + taskStub.getCall(0).args[2]);
          assert.equal(taskStub.getCall(0).args[3], 'VSTS (Task:VSMobileCenterBuild)', 'userAgent arg is not correct. ' + taskStub.getCall(0).args[3]);
          assert.equal(taskStub.getCall(0).args[4], 'v1.0', 'apiVersion arg is not correct. ' + taskStub.getCall(0).args[4]);
 

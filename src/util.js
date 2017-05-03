@@ -144,7 +144,7 @@ function debug() {
 function info() {
    'use strict';
 
-   this.info(format(arguments));
+   info(format(arguments));
 }
 
 /*
@@ -157,7 +157,7 @@ function getMobileCenterEndpointDetails(endpointInputFieldName) {
     var errorMessage = "Can't decode endpoint.";
 
     var endpoint = tl.getInput(endpointInputFieldName, true);
-    this.info(`Endpoint: ${endpoint}`);
+    info(`Endpoint: ${endpoint}`);
     
     if (!endpoint) {
         throw new Error(errorMessage);
@@ -165,16 +165,16 @@ function getMobileCenterEndpointDetails(endpointInputFieldName) {
 
     let url = tl.getEndpointUrl(endpoint, false);
     //let url = "https://api.mobile.azure.com/v0.1/apps/silamb/magicunicorn.ios-01";
-    this.info(`URL: ${url}`);
+    info(`URL: ${url}`);
     let apiServer = url.substr(0, url.lastIndexOf('/'));
-    this.info(`API Server: ${apiServer}`);
+    info(`API Server: ${apiServer}`);
     let apiVersion = url.substr(url.lastIndexOf('/') + 1);
-    this.info(`API Version: ${apiVersion}`);
+    info(`API Version: ${apiVersion}`);
     var authToken = tl.getEndpointAuthorizationParameter(endpoint, 'apitoken', false);
 
     if (!authToken)
     {
-        this.info("NO AUTHTOKEN");
+        info("NO AUTHTOKEN");
     }
 
     return {
@@ -190,30 +190,30 @@ function getMobileCenterEndpointDetails(endpointInputFieldName) {
 function showSplashScreen() {
     'use strict';
 
-    this.info("                                                                                    ");
-    this.info("                                                                                    ");
-    this.info("                  /((((((\\\\                                                       ");
-    this.info("          =======((((((((((\\\\\                                                    ");
-    this.info("               ((           \\\\\\\                                                 ");
-    this.info("               ( (*    _/      \\\\\\\                                              ");
-    this.info("                 \    /  \      \\\\\\________________                              ");
-    this.info("                  |  |   |       </                  ((\\\\                         ");
-    this.info("                  o_|   /        /                      \ \\\\    \\\\\\\           ");
-    this.info("                       |  ._    (                        \ \\\\\\\\\\\\\\\\         ");
-    this.info("                       | /                       /       /    \\\\\\\     \\        ");
-    this.info("               .______/\/     /                 /       /         \\\               ");
-    this.info("              / __.____/    _/         ________(       /\                           ");
-    this.info("             / / / ________/`---------'         \     /  \_                         ");
-    this.info("            / /  \ \                             \   \ \_  \                        ");
-    this.info("           ( <    \ \                             >  /    \ \                       ");
-    this.info("            \/      \\_                          / /       > )                      ");
-    this.info("                     \_|                        / /       / /                       ");
-    this.info("                                              _//       _//                         ");
-    this.info("                                             /_|       /_|                          ");
-    this.info("                                                                                    ");
-    this.info("                           https://simonlamb.codes                                  ");
-    this.info("                                                                                    ");
-    this.info("                                                                                    ");
+    console.log("                                                                                    ");
+    console.log("                                                                                    ");
+    console.log("                  /((((((\\\\                                                       ");
+    console.log("          =======((((((((((\\\\\                                                    ");
+    console.log("               ((           \\\\\\\                                                 ");
+    console.log("               ( (*    _/      \\\\\\\                                              ");
+    console.log("                 \    /  \      \\\\\\________________                              ");
+    console.log("                  |  |   |       </                  ((\\\\                         ");
+    console.log("                  o_|   /        /                      \ \\\\    \\\\\\\           ");
+    console.log("                       |  ._    (                        \ \\\\\\\\\\\\\\\\         ");
+    console.log("                       | /                       /       /    \\\\\\\     \\        ");
+    console.log("               .______/\/     /                 /       /         \\\               ");
+    console.log("              / __.____/    _/         ________(       /\                           ");
+    console.log("             / / / ________/`---------'         \     /  \_                         ");
+    console.log("            / /  \ \                             \   \ \_  \                        ");
+    console.log("           ( <    \ \                             >  /    \ \                       ");
+    console.log("            \/      \\_                          / /       > )                      ");
+    console.log("                     \_|                        / /       / /                       ");
+    console.log("                                              _//       _//                         ");
+    console.log("                                             /_|       /_|                          ");
+    console.log("                                                                                    ");
+    console.log("                           https://simonlamb.codes                                  ");
+    console.log("                                                                                    ");
+    console.log("                                                                                    ");
 }
 
 /*

@@ -22,41 +22,35 @@ function run(apiServer, appSlug, apiToken, userAgent, apiVersion) {
     // Show a lovely splash screen with majestic unicorn. It's magic and stuff...
     util.showSplashScreen();
 
-    // Run the build and wait for the results
-    runBuild();
+    // Construct build definition Url
+    var buildDefinitionUrl = `${mobileCenterBaseUrl}/branches/master/builds`;
 
-    function runBuild()
-    {
-            // Construct build definition Url
-        var buildDefinitionUrl = `${mobileCenterBaseUrl}/branches/master/builds`;
+    var options = {
+        url: buildDefinitionUrl,
+        method: 'POST',
+        headers: {
+            "X-API-Token": apiToken,
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+    };
 
-        var options = {
-            url: buildDefinitionUrl,
-            method: 'POST',
-            headers: {
-                "X-API-Token": apiToken,
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            }
-        };
+    request(options)
+        .then(function (body) {
+            // Parse the response so we can get the id of the new version
+            var buildDefinitionResponse = JSON.parse(body);
+            var buildId = buildDefinitionResponse.id;
 
-        request(options)
-            .then(function (body) {
-                // Parse the response so we can get the id of the new version
-                var buildDefinitionResponse = JSON.parse(body);
-                var buildId = buildDefinitionResponse.id;
-
-                return buildId;
-            })
-            .then(function (buildId) {
-                util.debug("Starting build for Build Id: {0}", buildId);
-                return waitForCompletion(buildId);
-            })
-            .then(function (buildId) {
-                util.debug("Build is complete. Retrieving built output...");
-                return downloadOutput(buildId);
-            });
-    }
+            return buildId;
+        })
+        .then(function (buildId) {
+            util.debug("Starting build for Build Id: {0}", buildId);
+            return waitForCompletion(buildId);
+        })
+        .then(function (buildId) {
+            util.debug("Build is complete. Retrieving built output...");
+            return downloadOutput(buildId);
+        });
 
     function waitForCompletion(buildId) {
         return Q.delay(waitTime * 1000)

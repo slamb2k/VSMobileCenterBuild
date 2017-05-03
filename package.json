@@ -7,9 +7,8 @@
     "src": "src"
   },
   "scripts": {
-    "test": "concurrently \"npm run cobertura\" \"npm run html\"",
-    "cobertura": "istanbul cover --report cobertura node_modules/mocha/bin/_mocha -- -R list",
-    "html": "istanbul cover node_modules/mocha/bin/_mocha -- -R list"
+    "test": "istanbul cover node_modules/mocha/bin/_mocha -- -R list",
+    "coverage": "istanbul cover --report cobertura node_modules/mocha/bin/_mocha -- -R list"
   },
   "repository": {},
   "keywords": [],
