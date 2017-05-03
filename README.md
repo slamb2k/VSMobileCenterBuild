@@ -7,10 +7,6 @@ Start a build in Azure Mobile Center, wait for it to finish and retrieve the bui
 ## Capabilities
 VSMobileCenterBuild is a custom build task that allows a build definition to trigger a build in Visual Studio Mobile Center. The build task will loop repeatedly after triggering the build and continuously check the build status. Once the build status is complete then the resulting artifacts will be downloaded to a file **named mobile-center-artifacts.zip** in the current working directory. This file should be published as artifacts for the current build using the native [publish build task](https://www.visualstudio.com/en-us/docs/build/steps/utility/copy-and-publish-build-artifacts).
 
-It allows you to deploy to the following platforms:
-- [Azure App Service](https://azure.microsoft.com/en-us/services/app-service/web/)
-- [Docker](https://www.docker.com/)
-
 ## Requirements
 - [Team Foundation Server 2017](https://www.visualstudio.com/downloads/) or [Visual Studio Team Services Account](https://app.vsaex.visualstudio.com/profile/account)
 - [Visual Studio Mobile Center Subscription](https://mobile.azure.com)
