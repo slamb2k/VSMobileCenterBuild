@@ -10,7 +10,11 @@ VSMobileCenterBuild is a custom build task that allows a build definition to tri
 ## Requirements
 - [Team Foundation Server 2017](https://www.visualstudio.com/downloads/) or [Visual Studio Team Services Account](https://app.vsaex.visualstudio.com/profile/account)
 - [Visual Studio Mobile Center Subscription](https://mobile.azure.com)
-   - [Service Principal](http://donovanbrown.com/post/Creating-an-Azure-Resource-Manager-Service-Endpoint-in-new-Portal)
+   - [Configure a build](https://docs.microsoft.com/en-us/mobile-center/build/) in Mobile Center and [connect to a source control repository](https://docs.microsoft.com/en-us/mobile-center/build/connect)
+        - [Visual Studio Team Services](https://azure.microsoft.com/en-au/services/visual-studio-team-services/)
+        - [GitHub](https://github.com/)
+        - [Bitbucket](https://bitbucket.org/)
+
 
 ## Install
 You can read how to use it at [simonlamb.codes](http://simonlamb.codes/). 
