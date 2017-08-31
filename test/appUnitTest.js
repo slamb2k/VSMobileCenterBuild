@@ -13,7 +13,7 @@ describe('app', function () {
    it('should run the task', function () {
       /* Arrange */
       var taskStub = sinon.stub(task, 'run');
-      taskStub.withArgs('https://api.mobile.azure.com', "someuser/someapp", 'apikey', 'VSTS (Task:VSMobileCenterBuild)', 'v1.0');
+      taskStub.withArgs('https://api.mobile.azure.com', 'someuser', 'someapp', 'master', 'apikey', 'VSTS (Task:VSMobileCenterBuild)', 'v1.0');
 
       sinon.stub(tl, 'debug');
 
@@ -21,8 +21,10 @@ describe('app', function () {
       utilStub.withArgs('serverEndpoint').returns({ apiServer: 'https://api.mobile.azure.com', apiVersion: 'v1.0', authToken: 'apikey' });
 
       var input = sinon.stub(tl, 'getInput');
-      input.withArgs('appSlug').returns('someuser/someapp');
-
+      input.withArgs('ownerName').returns('someuser');
+      input.withArgs('appName').returns('someapp');
+      input.withArgs('branch').returns('master');
+      
       var getVar = sinon.stub(tl, 'getVariable');
       getVar.withArgs('MSDEPLOY_HTTP_USER_AGENT').returns(null);
 
@@ -37,13 +39,15 @@ describe('app', function () {
          
          // Test that is was called with the correct values
          assert.equal(taskStub.getCall(0).args[0], 'https://api.mobile.azure.com', 'apiServer arg is not correct. ' + taskStub.getCall(0).args[0]);
-         assert.equal(taskStub.getCall(0).args[1], 'someuser/someapp', 'appSlug arg is not correct. ' + taskStub.getCall(0).args[1]);
-         assert.equal(taskStub.getCall(0).args[2], 'apikey', 'apiToken arg is not correct. ' + taskStub.getCall(0).args[2]);
-         assert.equal(taskStub.getCall(0).args[3], 'VSTS (Task:VSMobileCenterBuild)', 'userAgent arg is not correct. ' + taskStub.getCall(0).args[3]);
-         assert.equal(taskStub.getCall(0).args[4], 'v1.0', 'apiVersion arg is not correct. ' + taskStub.getCall(0).args[4]);
+         assert.equal(taskStub.getCall(0).args[1], 'someuser', 'ownerName arg is not correct. ' + taskStub.getCall(0).args[1]);
+         assert.equal(taskStub.getCall(0).args[2], 'someapp', 'appName arg is not correct. ' + taskStub.getCall(0).args[2]);
+         assert.equal(taskStub.getCall(0).args[3], 'master', 'branch arg is not correct. ' + taskStub.getCall(0).args[3]);
+         assert.equal(taskStub.getCall(0).args[4], 'apikey', 'apiToken arg is not correct. ' + taskStub.getCall(0).args[4]);
+         assert.equal(taskStub.getCall(0).args[5], 'VSTS (Task:VSMobileCenterBuild)', 'userAgent arg is not correct. ' + taskStub.getCall(0).args[5]);
+         assert.equal(taskStub.getCall(0).args[6], 'v1.0', 'apiVersion arg is not correct. ' + taskStub.getCall(0).args[6]);
 
-         assert.equal(input.calledOnce, true, 'tl.getInput not called ' + input.callCount);
-         assert.equal(input.calledOnce, true, 'tl.getVariable not called ' + getVar.callCount);
+         assert.equal(input.calledThrice, true, 'tl.getInput not called ' + input.callCount);
+         assert.equal(getVar.calledOnce, true, 'tl.getVariable not called ' + getVar.callCount);
       }
       finally {
          taskStub.restore();
