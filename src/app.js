@@ -5,7 +5,7 @@
  */
 (function () {
     'use strict';
-    
+
     var tl = require('vsts-task-lib');
     var util = require('./util.js');
 
@@ -19,7 +19,9 @@
     var task = require('./task.js');
     
     // Get the parameter values and cache them
-    let appSlug = tl.getInput('appSlug', true);
+    let ownerName = tl.getInput('ownerName', true);
+    let appName = tl.getInput('appName', true);
+    let branch = tl.getInput('branch', true);
     
     util.debug("Getting endpoint details...");
     let apiEndpointData = util.getMobileCenterEndpointDetails('serverEndpoint');
@@ -34,5 +36,5 @@
     userAgent = userAgent + ' (Task:VSMobileCenterBuild)';
 
     // Call the task
-    task.run(apiServer, appSlug, apiToken, userAgent, apiVersion);
+    task.run(apiServer, ownerName, appName, branch, apiToken, userAgent, apiVersion);
 }());

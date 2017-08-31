@@ -28,12 +28,28 @@
         "helpMarkDown": "Select the service endpoint for your Visual Studio Mobile Center connection. To create one, click the Manage link and create a new service endpoint."
     },
     {
-    "name": "appSlug",
+    "name": "ownerName",
     "type": "string",
-    "label": "App Slug",
+    "label": "Owner Name",
     "defaultValue": "",
     "required": true,
-    "helpMarkDown": "The app slug is in the format of **{username}/{app_identifier}**.  To locate **{username}** and **{app_identifier}** for an app, click on its name from https://mobile.azure.com/apps, and the resulting URL is in the format of [https://mobile.azure.com/users/<b>{username}</b>/apps/<b>{app_identifier}</b>](https://mobile.azure.com/users/{username}/apps/{app_identifier})"
+    "helpMarkDown": "The app owner is your username or the name of the organization to which the app belongs. To locate **{owner}** for an app, click on its name from https://mobile.azure.com/apps, and the resulting URL is in the format of [https://mobile.azure.com/users/<b>{owner}</b>/apps/<b>{app_name}</b>](https://mobile.azure.com/users/{username}/apps/{app_name})"
+    },
+    {
+      "name": "appName",
+      "type": "string",
+      "label": "App Name",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "The app name is the programmatic name of the app. To locate **{app_name}** for an app, click on its name from https://mobile.azure.com/apps, and the resulting URL is in the format of [https://mobile.azure.com/users/<b>{owner}</b>/apps/<b>{app_name}</b>](https://mobile.azure.com/users/{username}/apps/{app_name})"
+    },
+    {
+      "name": "branch",
+      "type": "string",
+      "label": "Target Branch",
+      "defaultValue": "master",
+      "required": true,
+      "helpMarkDown": "The source control branch to build."
     }
   ],
   "execution": {

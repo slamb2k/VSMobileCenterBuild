@@ -7,9 +7,13 @@ var Q = require("q");
 /*
  * The entry point for the task. This can be called by VSTS, the CLI or our test runners.
  */
-function run(apiServer, appSlug, apiToken, userAgent, apiVersion) {
+function run(apiServer, ownerName, appName, branch, apiToken, userAgent, apiVersion) {
     'use strict';
 
+    util.debug("Received argument ownerName: {0}", ownerName);
+    util.debug("Received argument appName: {0}", appName);
+    util.debug("Received argument branch: {0}", branch);
+    
     // How many seconds do we want to wait between checking the build status
     // after we have kicked off an asynchronous build.
     const waitTime = 5;
@@ -17,13 +21,15 @@ function run(apiServer, appSlug, apiToken, userAgent, apiVersion) {
     // The name of the zipped file downloaded with the build output from Mobile Center
     const MobileCenterBuildArtifacts = "mobile-center-artifacts.zip";
 
-    var mobileCenterBaseUrl = `${apiServer}/${apiVersion}/apps/${appSlug}`;
-
+    var mobileCenterBaseUrl = `${apiServer}/${apiVersion}/apps/${ownerName}/${appName}`;
+    
     // Show a lovely splash screen with majestic unicorn. It's magic and stuff...
     util.showSplashScreen();
 
     // Construct build definition Url
-    var buildDefinitionUrl = `${mobileCenterBaseUrl}/branches/master/builds`;
+    var buildDefinitionUrl = `${mobileCenterBaseUrl}/branches/${branch}/builds`;
+
+    util.debug("Sending POST request to {0}", buildDefinitionUrl);
 
     var options = {
         url: buildDefinitionUrl,
@@ -34,7 +40,7 @@ function run(apiServer, appSlug, apiToken, userAgent, apiVersion) {
             "Content-Type": "application/json"
         }
     };
-
+    
     request(options)
         .then(function (body) {
             // Parse the response so we can get the id of the new version
@@ -50,6 +56,9 @@ function run(apiServer, appSlug, apiToken, userAgent, apiVersion) {
         .then(function (buildId) {
             util.debug("Build is complete. Retrieving built output...");
             return downloadOutput(buildId);
+        })
+        .catch(function(err) {
+            tl.error(err);
         });
 
     function waitForCompletion(buildId) {

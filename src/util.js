@@ -144,7 +144,7 @@ function debug() {
 function info() {
    'use strict';
 
-   info(format(arguments));
+   console.info(format(arguments));
 }
 
 /*
